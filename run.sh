@@ -1,8 +1,15 @@
 #!/bin/bash
 
-# 设定你的SSD设备标识符和挂载点
-SSD_DEVICE="/dev/disk2"
-MOUNT_POINT="/Volumes/YourSSDMountPoint"
+while getopts d:p: flag
+do
+    case "${flag}" in
+        d) SSD_DEVICE=${OPTARG};;
+        p) MOUNT_POINT=${OPTARG};;
+    esac
+done
+
+echo "SSD_DEVICE: $SSD_DEVICE";
+echo "MOUNT_POINT: $MOUNT_POINT";
 
 # 尝试卸载设备
 if diskutil unmountDisk "$SSD_DEVICE"; then
